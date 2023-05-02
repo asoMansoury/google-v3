@@ -2,12 +2,14 @@ import Response from "@/Response";
 import PaginationButtons from "@/components/PaginationButtons";
 import SearchHeader from "@/components/SearchHeader";
 import SearchResults from "@/components/SearchResults";
+import ImageResults from "@/components/ImageResults";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
 
 export default function search({results}) {
   const router = useRouter();
+
   return (
     <div>
         <Head>
@@ -17,10 +19,15 @@ export default function search({results}) {
         {/*Searh Heaer */}
         <SearchHeader></SearchHeader>
         
-        {/*Searh Results */}
-        <SearchResults results= {results}></SearchResults>
+        {/*Searh web and images Results */}
+        {router.query.searchType==="image" ?(
+          <ImageResults results= {results}></ImageResults>
+        ):(
+          <SearchResults results= {results}></SearchResults>
+        )}
 
-        <PaginationButtons></PaginationButtons>
+        
+
     </div>
   )
 }
